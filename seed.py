@@ -5,12 +5,10 @@ if __name__ == "__main__":
     app = create_app()
 
     with app.app_context():
-        # Clear tables
         HeroPower.query.delete()
         Hero.query.delete()
         Power.query.delete()
 
-        # Create Heroes
         heroes_data = [
             {"name": "Kamala Khan", "super_name": "Ms. Marvel"},
             {"name": "Doreen Green", "super_name": "Squirrel Girl"},
@@ -26,7 +24,6 @@ if __name__ == "__main__":
 
         heroes = [Hero(**data) for data in heroes_data]
 
-        # Create Powers
         powers_data = [
             {"name": "super strength", "description": "gives the wielder super-human strengths"},
             {"name": "flight", "description": "gives the wielder the ability to fly through the skies at supersonic speed"},
@@ -36,7 +33,7 @@ if __name__ == "__main__":
 
         powers = [Power(**data) for data in powers_data]
 
-        # Add to session
+
         db.session.add_all(heroes + powers)
         db.session.commit()
 
